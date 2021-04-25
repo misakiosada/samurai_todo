@@ -69,3 +69,92 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-source software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+
+## 環境構築
+
+https://coxcox.hatenablog.com/entry/2019/03/14/172143
+1.homebrewのinstall - https://brew.sh/index_ja
+ (HomebrewはMac用のパッケージ管理システム。)
+2.PHPをインストール
+ brew install php@7.3      #@以下でバージョン指定
+3.composer (PHPのパッケージ管理システム)をインストール 
+ brew install homebrew/core/composer
+4.PATHを通す  https://qiita.com/miya_sho/items/4b79c9a74fecb42768f6
+コマンド検索パス(コマンドサーチパス)を追加すること
+新たに環境変数のPATH(パス)を追加することでどこのディレクトリからもcomposer.pharを実行できる
+コマンド検索パスに~/.composer/vendor/binが追加されているかを確認
+echo $PATH　コマンドで、pathの確認。
+vim ~/.bashrcを開き、
+　　　　　　　vim -テクストエディタ。ターミナル上で、編集が可能。
+export PATH="$PATH:$HOME/.composer/vendor/bin"
+をvim内に記入。
+（composerにパスを通す。）
+source ~/.bash_profile　で実行される。
+      *.bash_profile（.zshrc）はユーザがターミナルを新規で開いた場合に読み込まれるファイル。
+
+5.Valetのinstall
+composer global require laravel/valet
+valet install
+Valet（ベレット：従者）はMacミニマニストのためのLaravel開発環境。
+
+6.Laravel install
+composer global require "laravel/installer"
+
+## Laravelの設定
+https://qiita.com/miya_sho/items/6e6635555fcb0af9fa66
+laravelのプロジェクトを作成
+composer create-project laravel/laravel=5.8 Laravel_app
+　*Laravel_appの部分はプロジェクト名
+
+cd Laravel_app で移動し
+php artisan -V でバージョンを確認
+
+## mysqlのインストールとデータベースの設定
+https://qiita.com/miya_sho/items/6e6635555fcb0af9fa66
+brew install mysql 
+mysql -V　でバージョンを確認
+mysql.server start　で起動をさせる
+mysql -uroot　rootユーザーでログイン
+mysql> create database macdb;　でデータベースを作成macdbはデータベースのファイル名
+mysql> create user mac@localhost identified by 'mo'; ユーザー作成。macがユーザー名でmoがパスワード
+
+mysqlがうごかない時は mysql -u user-name -pでログインしてみる
+
+
+## Laravelとデータベースの紐付け
+.envファイル
+DB_CONNECTION=mysql
+DB_HOST=localhost　→　127.0.0.1に変更
+DB_PORT=3306
+DB_DATABASE=macdb
+DB_USERNAME=mac
+DB_PASSWORD=mo
+
+変更したら、
+php artisan config:cache
+php artisan cache:clear 
+php artisan migrate 
+
+Illuminate\Database\QueryException  : SQLSTATE[HY000] [2002] No such file or directory (SQL: select * from information_schema.tables where table_schema = macdb and table_name = migrations and table_type = 'BASE TABLE')
+のエラーが起きた場合は、.envのDBの記載が正しいか確認。
+
+### npmコマンドをするために、node をインストール
+https://qiita.com/non0311/items/664cf74d9ff4bad9cf46
+brew install nodebrew
+nodebrew install-binary latest　最新版のインストール
+エラーが出たら、
+mkdir -p ~/.nodebrew/src
+nodebrew install-binary latest
+リストからバージョンを選択
+nodebrew list　で確認して、
+nodebrew use v16.0.0　でバージョンを入力
+
+*パスを通す
+echo 'export PATH=$PATH:$HOME/.nodebrew/current/bin' >> ~/.bash_profile
+vi ~/.bash_profile　に以下を入力。
+vim -> e: vi ~/.bash_profile -> iで編集　->以下を入力
+if [ -f ~/.bashrc ] ; then
+. ~/.bashrc
+fi
+-> escボタン押して -> :wqで保存と終了
