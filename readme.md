@@ -159,6 +159,14 @@ if [ -f ~/.bashrc ] ; then
 fi
 -> escボタン押して -> :wqで保存と終了
 
+### Font Awesome
+インストール前に package.jsonに以下を追加。
+}のあとの,コンマがないとインストールできません。
+    },
+        "dependencies": {
+                    "font-awesome": "^4.7.0"
+            }
+
 ###　Sortableのインストール
 composer require rutorika/sortable
 でエラーが発生した場合、バージョンの不一致の可能性が高い。
