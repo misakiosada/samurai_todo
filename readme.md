@@ -158,3 +158,8 @@ if [ -f ~/.bashrc ] ; then
 . ~/.bashrc
 fi
 -> escボタン押して -> :wqで保存と終了
+
+###　Sortableのインストール
+composer require rutorika/sortable
+でエラーが発生した場合、バージョンの不一致の可能性が高い。
+composer require rutorika/sortable 7.0.0　でバージョンを指定することが可能
