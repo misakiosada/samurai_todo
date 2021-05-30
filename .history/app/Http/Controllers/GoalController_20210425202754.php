@@ -71,5 +71,3 @@ class GoalController extends Controller
         return response()->json($goals);
     }
 }
-
-
