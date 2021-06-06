@@ -15,8 +15,8 @@ class CreateGoalsTable extends Migration
     {
         Schema::create('goals', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('title');
-            $table->integer('user_id');
+              $table->string('title');
+              $table->integer('user_id');
             $table->timestamps();
         });
     }

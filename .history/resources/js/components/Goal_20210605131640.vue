@@ -204,7 +204,7 @@ export default {
                     this.tags.push(response.data[i])
                     console.log(this.tags[i])
                 }
-                console.log(this.tags)
+               console.log(this.tags)
             }, (error) => {
                 console.log(error)
             })
