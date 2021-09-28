@@ -153,7 +153,6 @@ export default {
     methods: {
         getAllGoals: function () {
             axios.get("/goals").then((response) => {
-                console.log(this.goals)
                 for(let i = 0; i < response.data.length; i++) {
                     this.goals.push(response.data[i])
                 }

@@ -32,8 +32,6 @@ class GoalController extends Controller
         $goal->user_id = Auth::id();
         $goal->save();
 
-        $goals = Goal::all();
-
         return response()->json($goals);
     }
 
@@ -50,8 +48,6 @@ class GoalController extends Controller
         $goal->user_id = Auth::id();
         $goal->save();
 
-        $goals = Goal::all();
-
         return response()->json($goals);
     }
 
@@ -63,10 +59,8 @@ class GoalController extends Controller
      */
     public function destroy(Goal $goal)
     {
-        $goals = Auth::user();
-        $goal ->delete();
+        $goal->delete();
 
-        $goals = Goal::all();
         return response()->json($goals);
     }
 }

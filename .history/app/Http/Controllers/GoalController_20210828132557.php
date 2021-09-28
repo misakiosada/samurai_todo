@@ -63,8 +63,7 @@ class GoalController extends Controller
      */
     public function destroy(Goal $goal)
     {
-        $goals = Auth::user();
-        $goal ->delete();
+        Goal::find(Auth::user()->id)->destroy();
 
         $goals = Goal::all();
         return response()->json($goals);

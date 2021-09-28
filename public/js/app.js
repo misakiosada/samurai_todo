@@ -1883,14 +1883,16 @@ __webpack_require__.r(__webpack_exports__);
     'goals-todos': _Todos_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
   },
   mounted: function mounted() {
-    this.getAllGaols();
+    this.getAllGoals();
     this.getAllTags();
   },
   methods: {
-    getAllGaols: function getAllGaols() {
+    getAllGoals: function getAllGoals() {
       var _this = this;
 
       axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("/goals").then(function (response) {
+        console.log(_this.goals);
+
         for (var i = 0; i < response.data.length; i++) {
           _this.goals.push(response.data[i]);
         }

@@ -61,10 +61,10 @@ class GoalController extends Controller
      * @param  \App\Goal  $goal
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Goal $goal)
+    public function destroy(Goal $goal, $id)
     {
-        $goals = Auth::user();
-        $goal ->delete();
+        $goal = Auth::user($id);
+        $goal -> delete();
 
         $goals = Goal::all();
         return response()->json($goals);

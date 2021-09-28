@@ -13,6 +13,16 @@ class GoalController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+
+        $this->middleware('log')->only('index');
+
+        $this->middleware('subscribed')->except('store');
+    }
+
     public function index()
     {
         return Goal::all();
@@ -63,8 +73,10 @@ class GoalController extends Controller
      */
     public function destroy(Goal $goal)
     {
-        $goals = Auth::user();
-        $goal ->delete();
+        $user = Auth::user()->id;
+        $goals = $user->goals;
+
+        $goal->delete();
 
         $goals = Goal::all();
         return response()->json($goals);

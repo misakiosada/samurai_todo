@@ -13,6 +13,7 @@ class GoalController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
     public function index()
     {
         return Goal::all();
@@ -63,8 +64,7 @@ class GoalController extends Controller
      */
     public function destroy(Goal $goal)
     {
-        $goals = Auth::user();
-        $goal ->delete();
+        $goal->delete();
 
         $goals = Goal::all();
         return response()->json($goals);

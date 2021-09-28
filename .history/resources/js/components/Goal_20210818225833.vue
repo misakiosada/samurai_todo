@@ -109,7 +109,7 @@
             <div v-for="(goal, key, index) in goals" :key=index>
                 <div class="card h-100 m-3" style="width: 24rem;">
                     <div class="d-flex justify-content-between">
-                        <h3 class="ml-5 mt-2">{{ goal.title }}</h3>
+                        <h3 class="ml-5 mt-2">{{ title }}</h3>
                         <div>
                             <i class="fa fa-plus p-2" data-toggle="modal" :data-target="'#todoModal'+goal.id"></i>
                             <div class="btn-group dropdown">
@@ -135,12 +135,13 @@ import Todos from "./Todos.vue";
 export default {
     data: function() {
         return {
-            id: "",
-            title: "",
+            id: 1,
+            title: "test1",
             tagId: "",
             tagTitle: "",
             goals: [],
             tags: []
+
         }
     },
     components: {
@@ -151,9 +152,8 @@ export default {
         this.getAllTags();
     },
     methods: {
-        getAllGoals: function () {
+        getAllGaols: function () {
             axios.get("/goals").then((response) => {
-                console.log(this.goals)
                 for(let i = 0; i < response.data.length; i++) {
                     this.goals.push(response.data[i])
                 }
@@ -172,7 +172,7 @@ export default {
             }, (error) => {
                 console.log(error)
             })
-            this.title = ""
+
         },
         editGoalTitle: function () {
             axios.defaults.headers['X-CSRF-TOKEN'] = $('meta[name=csrf-token]').attr('content');
@@ -185,7 +185,7 @@ export default {
             }, (error) => {
                 console.log(error)
             })
-            this.title = ""
+
         },
         deleteGoal: function () {
             axios.defaults.headers['X-CSRF-TOKEN'] = $('meta[name=csrf-token]').attr('content');
@@ -196,7 +196,7 @@ export default {
             }, (error) => {
                 console.log(error)
             })
-            this.id = ""
+
         },
         getAllTags: function () {
             axios.get("/tags").then((response) => {

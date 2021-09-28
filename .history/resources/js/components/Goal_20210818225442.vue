@@ -135,8 +135,8 @@ import Todos from "./Todos.vue";
 export default {
     data: function() {
         return {
-            id: "",
-            title: "",
+            id: 1,
+            title: "test1",
             tagId: "",
             tagTitle: "",
             goals: [],
@@ -151,9 +151,8 @@ export default {
         this.getAllTags();
     },
     methods: {
-        getAllGoals: function () {
+        getAllGaols: function () {
             axios.get("/goals").then((response) => {
-                console.log(this.goals)
                 for(let i = 0; i < response.data.length; i++) {
                     this.goals.push(response.data[i])
                 }
