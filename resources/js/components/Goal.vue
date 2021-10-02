@@ -161,7 +161,7 @@ export default {
                 console.log(error)
             })
         },
-        addNewGoal: function () {
+        addNewGoal: function () {s
             axios.defaults.headers['X-CSRF-TOKEN'] = $('meta[name=csrf-token]').attr('content');
             axios.defaults.headers['content-type'] = 'application/json';
             axios.post("/goals", {title: this.title}).then((response) => {

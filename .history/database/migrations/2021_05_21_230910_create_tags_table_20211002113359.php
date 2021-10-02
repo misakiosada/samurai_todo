@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTodoTagsTable extends Migration
+class CreateTagsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class CreateTodoTagsTable extends Migration
      */
     public function up()
     {
-        Schema::create('tag_todo', function (Blueprint $table) {
-             $table->bigIncrements('id');
-             $table->integer('todo_id');
-             $table->integer('tag_id');
+        Schema::create('tags', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->string('title');
+            $table->integer('user_id');
             $table->timestamps();
         });
     }
@@ -28,6 +28,9 @@ class CreateTodoTagsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('todo_tags');
+        Schema::table('tags', function (Blueprint $table) {
+            $table->dropColumn('title');
+            $table->dropColumn('user_id');
+        });
     }
 }

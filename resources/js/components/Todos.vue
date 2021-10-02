@@ -91,6 +91,8 @@
                         </div>
                     </div>
                 </div>
+
+                
             </div>
 
             <div class="modal fade" :id="'todoSortModal'+goalId+todo.id" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
